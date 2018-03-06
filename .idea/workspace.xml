@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bab24b02-6b4a-4965-a91e-d2af8eff6608" name="Default" comment="" />
+    <list default="true" id="bab24b02-6b4a-4965-a91e-d2af8eff6608" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/lt/swedbank/interestcalculator/CompoundInterestCalculator.java" afterPath="$PROJECT_DIR$/src/lt/swedbank/interestcalculator/CompoundInterestCalculator.java" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -15,8 +18,8 @@
       <file leaf-file-name="CompoundInterestCalculator.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/lt/swedbank/interestcalculator/CompoundInterestCalculator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-483">
-              <caret line="17" column="40" lean-forward="true" selection-start-line="17" selection-start-column="40" selection-end-line="17" selection-end-column="40" />
+            <state relative-caret-position="282">
+              <caret line="62" column="35" lean-forward="false" selection-start-line="62" selection-start-column="35" selection-end-line="62" selection-end-column="35" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#readInput#0;class#CompoundInterestCalculator#0" expanded="false" />
@@ -194,12 +197,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1520252778611</updated>
-      <workItem from="1520252782769" duration="17607000" />
+      <workItem from="1520252782769" duration="17848000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="17607000" />
+    <option name="totallyTimeSpent" value="17848000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -249,8 +252,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/lt/swedbank/interestcalculator/CompoundInterestCalculator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-483">
-          <caret line="17" column="40" lean-forward="true" selection-start-line="17" selection-start-column="40" selection-end-line="17" selection-end-column="40" />
+        <state relative-caret-position="282">
+          <caret line="62" column="35" lean-forward="false" selection-start-line="62" selection-start-column="35" selection-end-line="62" selection-end-column="35" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#readInput#0;class#CompoundInterestCalculator#0" expanded="false" />

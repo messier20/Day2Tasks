@@ -12,7 +12,7 @@ public class CompoundInterestCalculator {
 
     public static void main(String[] args) {
 
-        int  compoundFrequencyNumber;
+        int compoundFrequencyNumber;
         int arrayLength;
         int arrayIndex = 0;
         double compoundingFrequency = 0;
@@ -27,7 +27,6 @@ public class CompoundInterestCalculator {
         arrayLength = compoundFrequencyNumber * periodLength;
         InterestAmounts = new double[arrayLength];
         InterestAmountAfterYear = new double[arrayLength];
-
 
         for (int i = 1; i <= arrayLength; i++) {
 
@@ -52,7 +51,6 @@ public class CompoundInterestCalculator {
 
         System.out.println(arrayString);
         System.out.printf("Total amount: %.2f\n", compoundingFrequency);
-
 
     }
 
@@ -98,6 +96,5 @@ public class CompoundInterestCalculator {
                 return 1;
         }
     }
-
 
 }
