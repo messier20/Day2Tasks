@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class CompoundInterestCalculator {
 
     static int amount;
-    static int interestRate;
+    static int[] interestRate;
     static int periodLength;
     static String compoundFrequency;
 
@@ -20,7 +20,14 @@ public class CompoundInterestCalculator {
         double[] InterestAmounts;
         String arrayString;
 
+        interestRate = new int[1];
+
         readInput();
+        System.out.println(amount);
+        arrayString = Arrays.toString(interestRate);
+
+        System.out.println(arrayString);
+
 
         compoundFrequencyNumber = findFrequencyNumber(compoundFrequency);
 
@@ -28,47 +35,54 @@ public class CompoundInterestCalculator {
         InterestAmounts = new double[arrayLength];
         InterestAmountAfterYear = new double[arrayLength];
 
-        for (int i = 1; i <= arrayLength; i++) {
+//        for (int i = 1; i <= arrayLength; i++) {
+//
+//            compoundingFrequency = calculateCompoundingFrequency(compoundFrequencyNumber, i);
+//
+//            InterestAmountAfterYear[arrayIndex] = compoundingFrequency - amount;
+//
+//            if (i == 1) {
+//                InterestAmounts[0] = InterestAmountAfterYear[arrayIndex];
+//            }
+//
+//            if (i > 1) {
+//                InterestAmounts[arrayIndex] = InterestAmountAfterYear[arrayIndex] - InterestAmountAfterYear[arrayIndex - 1];
+//            }
+//
+//            System.out.printf("Interest amount after year " + i + ": %.2f\n", InterestAmountAfterYear[arrayIndex]);
+//
+//            arrayIndex++;
+//        }
 
-            compoundingFrequency = calculateCompoundingFrequency(compoundFrequencyNumber, i);
-
-            InterestAmountAfterYear[arrayIndex] = compoundingFrequency - amount;
-
-            if (i == 1) {
-                InterestAmounts[0] = InterestAmountAfterYear[arrayIndex];
-            }
-
-            if (i > 1) {
-                InterestAmounts[arrayIndex] = InterestAmountAfterYear[arrayIndex] - InterestAmountAfterYear[arrayIndex - 1];
-            }
-
-            System.out.printf("Interest amount after year " + i + ": %.2f\n", InterestAmountAfterYear[arrayIndex]);
-
-            arrayIndex++;
-        }
-
-        arrayString = Arrays.toString(InterestAmounts);
-
-        System.out.println(arrayString);
-        System.out.printf("Total amount: %.2f\n", compoundingFrequency);
+//        arrayString = Arrays.toString(InterestAmounts);
+//
+//        System.out.println(arrayString);
+//        System.out.printf("Total amount: %.2f\n", compoundingFrequency);
 
     }
 
-    private static double calculateCompoundingFrequency(int compoundFrequencyNumber, int year) {
-        double powerBase = 1 + (interestRate * 0.01) / compoundFrequencyNumber;
-        double powerExponent = year * compoundFrequencyNumber;
-
-        return amount * Math.pow(powerBase, powerExponent);
-    }
+//    private static double calculateCompoundingFrequency(int compoundFrequencyNumber, int year) {
+//        double powerBase = 1 + (interestRate * 0.01) / compoundFrequencyNumber;
+//        double powerExponent = year * compoundFrequencyNumber;
+//
+//        return amount * Math.pow(powerBase, powerExponent);
+//    }
 
     private static void readInput() {
+        int k = 0;
+
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Amount: ");
         amount = scanner.nextInt();
 
-        System.out.print("Interest rate (%): ");
-        interestRate = scanner.nextInt();
+        do {
+            System.out.print("Interest rate (%): ");
+            interestRate = Arrays.copyOfRange(interestRate, 0, k + 1);
+
+            interestRate[k] = scanner.nextInt();
+            k++;
+        } while ((interestRate[k] == 0));
 
         System.out.print("Period length(years): ");
         periodLength = scanner.nextInt();
