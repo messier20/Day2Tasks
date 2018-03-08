@@ -5,18 +5,31 @@ import java.util.Scanner;
 
 public class CompoundInterestCalculator {
 
+    //I would not suggest using global variables here.
+    //Better solution would be to create separate methods for every input: ex.: getAmount(), getInterestRate(), etc.
     static int amount;
     static int interestRate;
     static int periodLength;
     static String compoundFrequency;
 
-    public static void main(String[] args) {
+    //Application is not behaving as expected.
+    //If "periodLength" = 3 and "compoundFrequency" = "M", it is expected that program would print:
+    //  3 "Interest amount after year ..." lines
+    //  +
+    //  "InterestAmounts" array containing 36 elements (3*12)
+    //
+    // Since in task's description this is not clearly stated, I'll let it slide this time :)
 
+    public static void main(String[] args) {
+        //Do not declare your local variables separately from their initialization.
+        //Variables should be declared where they're first used/needed.
         int compoundFrequencyNumber;
         int arrayLength;
         int arrayIndex = 0;
         double compoundingFrequency = 0;
+        //Naming!!! All variables should start from lowercase letter!
         double[] InterestAmountAfterYear;
+        //Same here
         double[] InterestAmounts;
         String arrayString;
 
@@ -37,13 +50,18 @@ public class CompoundInterestCalculator {
             if (i == 1) {
                 InterestAmounts[0] = InterestAmountAfterYear[arrayIndex];
             }
-
+            //You can replace this "if" statement with else
             if (i > 1) {
                 InterestAmounts[arrayIndex] = InterestAmountAfterYear[arrayIndex] - InterestAmountAfterYear[arrayIndex - 1];
             }
 
+            //"i" should be formatted in the same way as "InterestAmountAfterYear[arrayIndex]"
+            //"printf" takes 2 parameters: 1) format mask, 2) variables being formatted. Don't mix those two together!
+            //Ex.: System.out.printf("Interest amount after year %d: %.2f\n", i, InterestAmountAfterYear[arrayIndex]);
             System.out.printf("Interest amount after year " + i + ": %.2f\n", InterestAmountAfterYear[arrayIndex]);
 
+            //This can be substituted with "i". Try removing this variable from code (all places) and replacing it's usage with "i".
+            //In "for" loop, "i" should iterate [0;  arrayLength). In "calculateCompoundingFrequency(...)" pass "i+1" instead of "i".
             arrayIndex++;
         }
 
@@ -90,6 +108,7 @@ public class CompoundInterestCalculator {
                 return 4;
             case "H":
                 return 2;
+            //"case "Y":" can be removed, since "default:" is already returning "1".
             case "Y":
                 return 1;
             default:
