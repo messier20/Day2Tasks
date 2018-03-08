@@ -26,8 +26,8 @@ public class CompoundInterestCalculator {
         //Do not declare your local variables separately from their initialization.
         //Variables should be declared where they're first used/needed.
         int compoundFrequencyNumber;
-        int arrayLength;
-        int arrayIndex = 0;
+        int arrayLength ;
+        int index;
         double compoundingFrequency = 0;
         double[] interestAmountAfterYear;
         double[] interestAmounts;
@@ -41,27 +41,28 @@ public class CompoundInterestCalculator {
         interestAmounts = new double[arrayLength];
         interestAmountAfterYear = new double[arrayLength];
 
-        for (int i = 1; i <= arrayLength; i++) {
+        for (index = 0 ; index < arrayLength; index++) {
 
-            compoundingFrequency = calculateCompoundingFrequency(compoundFrequencyNumber, i);
+            compoundingFrequency = calculateCompoundingFrequency(compoundFrequencyNumber, index + 1);
 
-            interestAmountAfterYear[arrayIndex] = compoundingFrequency - amount;
+            interestAmountAfterYear[index] = compoundingFrequency - amount;
 
-            if (i == 1) {
-                interestAmounts[0] = interestAmountAfterYear[arrayIndex];
+            if (index == 0) {
+                interestAmounts[0] = interestAmountAfterYear[index];
             }
             else {
-                interestAmounts[arrayIndex] = interestAmountAfterYear[arrayIndex] - interestAmountAfterYear[arrayIndex - 1];
+                interestAmounts[index] = interestAmountAfterYear[index] - interestAmountAfterYear[index - 1];
             }
 
             //"i" should be formatted in the same way as "InterestAmountAfterYear[arrayIndex]"
             //"printf" takes 2 parameters: 1) format mask, 2) variables being formatted. Don't mix those two together!
             //Ex.: System.out.printf("Interest amount after year %d: %.2f\n", i, InterestAmountAfterYear[arrayIndex]);
-            System.out.printf("Interest amount after year " + i + ": %.2f\n", interestAmountAfterYear[arrayIndex]);
+            System.out.print("Interest amount after year " + (index + 1));
+            System.out.printf(": %.2f\n", interestAmountAfterYear[index]);
 
             //This can be substituted with "i". Try removing this variable from code (all places) and replacing it's usage with "i".
             //In "for" loop, "i" should iterate [0;  arrayLength). In "calculateCompoundingFrequency(...)" pass "i+1" instead of "i".
-            arrayIndex++;
+
         }
 
         arrayString = Arrays.toString(interestAmounts);
