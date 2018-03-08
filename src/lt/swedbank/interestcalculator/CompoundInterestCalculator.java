@@ -1,4 +1,4 @@
-package lt.swedbank.itacademy.interestcalculator;
+package lt.swedbank.interestcalculator;
 
 import java.util.Arrays;
 import java.util.Scanner;
@@ -7,6 +7,8 @@ public class CompoundInterestCalculator {
 
     //I would not suggest using global variables here.
     //Better solution would be to create separate methods for every input: ex.: getAmount(), getInterestRate(), etc.
+
+    //M: I agree. But on monday we "didn't know" these methods so I was trying to get the result without getters and setters
     static int amount;
     static int interestRate;
     static int periodLength;
@@ -27,10 +29,8 @@ public class CompoundInterestCalculator {
         int arrayLength;
         int arrayIndex = 0;
         double compoundingFrequency = 0;
-        //Naming!!! All variables should start from lowercase letter!
-        double[] InterestAmountAfterYear;
-        //Same here
-        double[] InterestAmounts;
+        double[] interestAmountAfterYear;
+        double[] interestAmounts;
         String arrayString;
 
         readInput();
@@ -38,34 +38,33 @@ public class CompoundInterestCalculator {
         compoundFrequencyNumber = findFrequencyNumber(compoundFrequency);
 
         arrayLength = compoundFrequencyNumber * periodLength;
-        InterestAmounts = new double[arrayLength];
-        InterestAmountAfterYear = new double[arrayLength];
+        interestAmounts = new double[arrayLength];
+        interestAmountAfterYear = new double[arrayLength];
 
         for (int i = 1; i <= arrayLength; i++) {
 
             compoundingFrequency = calculateCompoundingFrequency(compoundFrequencyNumber, i);
 
-            InterestAmountAfterYear[arrayIndex] = compoundingFrequency - amount;
+            interestAmountAfterYear[arrayIndex] = compoundingFrequency - amount;
 
             if (i == 1) {
-                InterestAmounts[0] = InterestAmountAfterYear[arrayIndex];
+                interestAmounts[0] = interestAmountAfterYear[arrayIndex];
             }
-            //You can replace this "if" statement with else
-            if (i > 1) {
-                InterestAmounts[arrayIndex] = InterestAmountAfterYear[arrayIndex] - InterestAmountAfterYear[arrayIndex - 1];
+            else {
+                interestAmounts[arrayIndex] = interestAmountAfterYear[arrayIndex] - interestAmountAfterYear[arrayIndex - 1];
             }
 
             //"i" should be formatted in the same way as "InterestAmountAfterYear[arrayIndex]"
             //"printf" takes 2 parameters: 1) format mask, 2) variables being formatted. Don't mix those two together!
             //Ex.: System.out.printf("Interest amount after year %d: %.2f\n", i, InterestAmountAfterYear[arrayIndex]);
-            System.out.printf("Interest amount after year " + i + ": %.2f\n", InterestAmountAfterYear[arrayIndex]);
+            System.out.printf("Interest amount after year " + i + ": %.2f\n", interestAmountAfterYear[arrayIndex]);
 
             //This can be substituted with "i". Try removing this variable from code (all places) and replacing it's usage with "i".
             //In "for" loop, "i" should iterate [0;  arrayLength). In "calculateCompoundingFrequency(...)" pass "i+1" instead of "i".
             arrayIndex++;
         }
 
-        arrayString = Arrays.toString(InterestAmounts);
+        arrayString = Arrays.toString(interestAmounts);
 
         System.out.println(arrayString);
         System.out.printf("Total amount: %.2f\n", compoundingFrequency);
@@ -109,9 +108,9 @@ public class CompoundInterestCalculator {
             case "H":
                 return 2;
             //"case "Y":" can be removed, since "default:" is already returning "1".
-            case "Y":
-                return 1;
+            //M: Now I switched it to default if someone would like to run the code with 'Y' but don't know that 1 year is default. Or is it also wrong?
             default:
+                case "Y":
                 return 1;
         }
     }
