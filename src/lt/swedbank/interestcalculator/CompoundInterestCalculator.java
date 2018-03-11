@@ -8,7 +8,8 @@ public class CompoundInterestCalculator {
     //I would not suggest using global variables here.
     //Better solution would be to create separate methods for every input: ex.: getAmount(), getInterestRate(), etc.
 
-    //M: I agree. But on monday we "didn't know" these methods so I was trying to get the result without getters and setters
+    //M: I agree. But on monday we "didn't know" these methods so I was trying to get the result without getters and setters.
+    //Should I change now?
     static int amount;
     static int interestRate;
     static int periodLength;
@@ -22,15 +23,19 @@ public class CompoundInterestCalculator {
     //
     // Since in task's description this is not clearly stated, I'll let it slide this time :)
 
+    //M: I tried to fix it. Is it behaving as should be right now?
+
     public static void main(String[] args) {
         //Do not declare your local variables separately from their initialization.
         //Variables should be declared where they're first used/needed.
+        //M: Mindaugas told me completely opposite, I don't understand.
         int compoundFrequencyNumber;
         int arrayLength ;
         int index;
         double compoundingFrequency = 0;
         double[] interestAmountAfterYear;
         double[] interestAmounts;
+        double[] interestAmountAfterIteration;
         String arrayString;
 
         readInput();
@@ -39,30 +44,29 @@ public class CompoundInterestCalculator {
 
         arrayLength = compoundFrequencyNumber * periodLength;
         interestAmounts = new double[arrayLength];
-        interestAmountAfterYear = new double[arrayLength];
+        interestAmountAfterYear = new double[periodLength + 1];
+        interestAmountAfterIteration = new double[arrayLength];
 
         for (index = 0 ; index < arrayLength; index++) {
-
             compoundingFrequency = calculateCompoundingFrequency(compoundFrequencyNumber, index + 1);
-
-            interestAmountAfterYear[index] = compoundingFrequency - amount;
+            interestAmountAfterIteration[index] = compoundingFrequency - amount;
 
             if (index == 0) {
-                interestAmounts[0] = interestAmountAfterYear[index];
+                interestAmounts[0] = interestAmountAfterIteration[index];
             }
             else {
-                interestAmounts[index] = interestAmountAfterYear[index] - interestAmountAfterYear[index - 1];
+                interestAmounts[index] = interestAmountAfterIteration[index] - interestAmountAfterIteration[index - 1];
             }
 
-            //"i" should be formatted in the same way as "InterestAmountAfterYear[arrayIndex]"
-            //"printf" takes 2 parameters: 1) format mask, 2) variables being formatted. Don't mix those two together!
-            //Ex.: System.out.printf("Interest amount after year %d: %.2f\n", i, InterestAmountAfterYear[arrayIndex]);
-            System.out.print("Interest amount after year " + (index + 1));
+        }
+
+        for (index = 1; index <= periodLength; index++ ) {
+            compoundingFrequency = calculateCompoundingFrequency(compoundFrequencyNumber, index);
+            interestAmountAfterYear[index] = compoundingFrequency - amount;
+
+            //M: Does this print correctly?
+            System.out.print("Interest amount after year " + (index));
             System.out.printf(": %.2f\n", interestAmountAfterYear[index]);
-
-            //This can be substituted with "i". Try removing this variable from code (all places) and replacing it's usage with "i".
-            //In "for" loop, "i" should iterate [0;  arrayLength). In "calculateCompoundingFrequency(...)" pass "i+1" instead of "i".
-
         }
 
         arrayString = Arrays.toString(interestAmounts);
