@@ -5,11 +5,12 @@ import java.util.Scanner;
 
 public class CompoundInterestCalculator {
 
-    static int amount;
-    static int interestRate[] = new int[1];
+    static float amount;
+    static float interestRate[] = new float[1];
     static int periodLength;
     static String compoundFrequency;
     static int i = 0;
+    static String check;
 
     public static void main(String[] args) {
 
@@ -31,7 +32,6 @@ public class CompoundInterestCalculator {
 
         if (interestRate[interestRate.length - 1] == 0) {
             interestRate = Arrays.copyOf(interestRate, interestRate.length - 1);
-            System.out.println(interestRate.length + " " + interestRate[interestRate.length - 1]);
         }
 
         for (interestRateIndex = 0; interestRateIndex < interestRate.length; interestRateIndex++) {
@@ -39,7 +39,8 @@ public class CompoundInterestCalculator {
                 compoundingFrequency =
                         calculateCompoundingFrequency(compoundFrequencyNumber, index + 1, interestRateIndex);
 
-                interestAmountAfterIteration[interestRateIndex][index] = compoundingFrequency - amount;
+                interestAmountAfterIteration[interestRateIndex][index] =
+                        compoundingFrequency - amount;
 
                 if (index == 0) {
                     interestAmounts[interestRateIndex][0] = interestAmountAfterIteration[interestRateIndex][index];
@@ -68,23 +69,50 @@ public class CompoundInterestCalculator {
     private static void readInput() {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Amount: ");
-        amount = scanner.nextInt();
+        do {
+            System.out.print("Amount: ");
+            check = scanner.nextLine();
+            if (!isAmountValid()) {
+                printInvalidInput();
+            } else amount = Float.parseFloat(check);
+
+        }
+        while (!isAmountValid());
+
 
         do {
             System.out.print("Interest rate (%): ");
-            interestRate = Arrays.copyOf(interestRate, i + 1);
-            interestRate[i] = scanner.nextInt();
-            i++;
+            check = scanner.nextLine();
+            if (isInterestRasteValid1()) {
+                interestRate = Arrays.copyOf(interestRate, i + 1);
+                interestRate[i] = Float.parseFloat(check);
+                i++;
+            } else printInvalidInput();
+
 
         }
-        while (!(interestRate[i - 1] == 0));
-        System.out.print("Period length(years): ");
-        periodLength = scanner.nextInt();
+        while (!isInterestRasteValid1() || !(interestRate[i - 1] == 0));
 
-        System.out.print("Compound frequency: ");
-        compoundFrequency = scanner.next();
+        do {
+            System.out.print("Period length(years): ");
+            check = scanner.nextLine();
+            if (!isPeriodLengthValid()) {
+                printInvalidInput();
+            } else periodLength = Integer.parseInt(check);
+
+        }
+        while (!isPeriodLengthValid());
+
+        do {
+            System.out.print("Compound frequency: ");
+            compoundFrequency = scanner.nextLine();
+            if (!isCompoundFrequencyValid()) {
+                printInvalidInput();
+            }
+        }
+        while (!isCompoundFrequencyValid());
     }
+
 
     private static int findFrequencyNumber(String compoundFrequency) {
 
@@ -103,6 +131,65 @@ public class CompoundInterestCalculator {
             case "Y":
                 return 1;
         }
+    }
+
+    private static boolean isAmountValid() throws NumberFormatException {
+        try {
+
+            if (Float.parseFloat(check) > 0) {
+                return true;
+            }
+            return false;
+        } catch (NumberFormatException wrongNumberFormat) {
+
+        }
+        return true;
+    }
+
+    private static boolean isPeriodLengthValid() throws NumberFormatException {
+        try {
+            if (Integer.parseInt(check) > 0) {
+                return true;
+            }
+            return false;
+        } catch (NumberFormatException wrongFormat) {
+        }
+        return false;
+    }
+
+    private static boolean isCompoundFrequencyValid() {
+        switch (compoundFrequency) {
+            case "D":
+                return true;
+            case "W":
+                return true;
+            case "M":
+                return true;
+            case "Q":
+                return true;
+            case "H":
+                return true;
+            case "Y":
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    private static boolean isInterestRasteValid1() throws NumberFormatException {
+        try {
+            if (Float.parseFloat(check) >= 0 && Float.parseFloat(check) <= 100) {
+                return true;
+            } else return false;
+        } catch (NumberFormatException invalidNumber) {
+        }
+
+
+        return false;
+    }
+
+    private static void printInvalidInput() {
+        System.out.println("Invalid input! Try again!");
     }
 
 }
