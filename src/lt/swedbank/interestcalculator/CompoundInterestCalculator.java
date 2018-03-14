@@ -83,7 +83,7 @@ public class CompoundInterestCalculator {
         do {
             System.out.print("Interest rate (%): ");
             check = scanner.nextLine();
-            if (isInterestRasteValid1()) {
+            if (isInterestRateValid()) {
                 interestRate = Arrays.copyOf(interestRate, i + 1);
                 interestRate[i] = Float.parseFloat(check);
                 i++;
@@ -91,7 +91,7 @@ public class CompoundInterestCalculator {
 
 
         }
-        while (!isInterestRasteValid1() || !(interestRate[i - 1] == 0));
+        while (!isInterestRateValid() || !(interestRate[i - 1] == 0));
 
         do {
             System.out.print("Period length(years): ");
@@ -113,7 +113,6 @@ public class CompoundInterestCalculator {
         while (!isCompoundFrequencyValid());
     }
 
-
     private static int findFrequencyNumber(String compoundFrequency) {
 
         switch (compoundFrequency) {
@@ -128,7 +127,6 @@ public class CompoundInterestCalculator {
             case "H":
                 return 2;
             default:
-            case "Y":
                 return 1;
         }
     }
@@ -176,7 +174,7 @@ public class CompoundInterestCalculator {
         }
     }
 
-    private static boolean isInterestRasteValid1() throws NumberFormatException {
+    private static boolean isInterestRateValid() throws NumberFormatException {
         try {
             if (Float.parseFloat(check) >= 0 && Float.parseFloat(check) <= 100) {
                 return true;
